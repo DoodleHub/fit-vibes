@@ -26,7 +26,11 @@ const ExerciseDetail = () => {
         exerciseOptions
       );
 
+      setExerciseVideos([]);
+      setTargetMuscleExercises([]);
+      setEquipmentExercises([]);
       setExerciseDetail(exerciseDetailData);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     fetchExercisesData();

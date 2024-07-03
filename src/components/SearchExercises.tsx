@@ -50,8 +50,14 @@ const SearchExercises = ({
           exercise.bodyPart.toLowerCase().includes(search)
       );
 
-      setSearch('');
       setExercises(searchedExercises);
+      location.href = '#exercises';
+    }
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
     }
   };
 
@@ -82,8 +88,10 @@ const SearchExercises = ({
           onChange={(e) => setSearch(e.target.value.toLowerCase())}
           placeholder="Search Exercises"
           type="text"
+          onKeyDown={handleInputKeyDown}
         />
         <Button
+          type="submit"
           className="search-btn"
           sx={{
             bgcolor: '#FF2625',
