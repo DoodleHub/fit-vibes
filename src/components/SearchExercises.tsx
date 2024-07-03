@@ -6,7 +6,17 @@ import { exerciseOptions, fetchData } from '../utils/fetchData';
 
 import { Exercise } from '../types';
 
-const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
+type SearchExercisesProps = {
+  setExercises: React.Dispatch<React.SetStateAction<Exercise[]>>;
+  bodyPart: string;
+  setBodyPart: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchExercises = ({
+  setExercises,
+  bodyPart,
+  setBodyPart,
+}: SearchExercisesProps) => {
   const [search, setSearch] = useState('');
   const [bodyParts, setBodyParts] = useState<string[]>([]);
 
