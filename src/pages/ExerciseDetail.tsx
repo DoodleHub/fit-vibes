@@ -12,6 +12,8 @@ import { Exercise, ExerciseVideoContent } from '../types';
 const ExerciseDetail = () => {
   const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
   const [exerciseVideos, setExerciseVideos] = useState([]);
+  const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
+  const [equipmentExercises, setEquipmentExercises] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,11 +21,11 @@ const ExerciseDetail = () => {
       const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
       const youtubeSearchUrl =
         'https://youtube-search-and-download.p.rapidapi.com';
+
       const exerciseDetailData = await fetchData(
         `${exerciseDbUrl}/exercises/exercise/${id}`,
         exerciseOptions
       );
-
       setExerciseDetail(exerciseDetailData);
 
       const exerciseVideosData = await fetchData(
@@ -31,16 +33,22 @@ const ExerciseDetail = () => {
         youtubeOptions
       );
 
-      if (!exerciseVideosData) {
-        setExerciseVideos([]);
-        return;
-      }
-
       const formattedExerciseVideosData = exerciseVideosData.contents.map(
         (content: ExerciseVideoContent) => content.video
       );
-
       setExerciseVideos(formattedExerciseVideosData);
+
+      const targetMuscleExercisesData = await fetchData(
+        `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+        exerciseOptions
+      );
+      setTargetMuscleExercises(targetMuscleExercisesData);
+
+      const equipmentExercisesData = await fetchData(
+        `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
+        exerciseOptions
+      );
+      setEquipmentExercises(equipmentExercisesData);
     };
 
     fetchExercisesData();
@@ -61,7 +69,10 @@ const ExerciseDetail = () => {
         exerciseVideos={exerciseVideos}
         name={exerciseDetail.name}
       />
-      <SimilarExercises />
+      <SimilarExercises
+        targetMuscleExercises={targetMuscleExercises}
+        equipmentExercises={equipmentExercises}
+      />
     </Box>
   );
 };
