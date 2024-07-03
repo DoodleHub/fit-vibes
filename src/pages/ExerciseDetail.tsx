@@ -30,50 +30,40 @@ const ExerciseDetail = () => {
       setTargetMuscleExercises([]);
       setEquipmentExercises([]);
       setExerciseDetail(exerciseDetailData);
+      fetchExerciseVideosData(exerciseDetailData);
+      fetchRelatedExerciseData(exerciseDetailData);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     fetchExercisesData();
   }, [id]);
 
-  useEffect(() => {
-    const fetchExerciseVideosData = async () => {
-      if (exerciseDetail) {
-        const exerciseVideosData = await fetchData(
-          `${youtubeSearchUrl}/search?query=${exerciseDetail.name}`,
-          youtubeOptions
-        );
+  const fetchExerciseVideosData = async (exerciseDetailData: Exercise) => {
+    const exerciseVideosData = await fetchData(
+      `${youtubeSearchUrl}/search?query=${exerciseDetailData.name}`,
+      youtubeOptions
+    );
 
-        const formattedExerciseVideosData = exerciseVideosData.contents.map(
-          (content: ExerciseVideoContent) => content.video
-        );
+    const formattedExerciseVideosData = exerciseVideosData.contents.map(
+      (content: ExerciseVideoContent) => content.video
+    );
 
-        setExerciseVideos(formattedExerciseVideosData);
-      }
-    };
+    setExerciseVideos(formattedExerciseVideosData);
+  };
 
-    fetchExerciseVideosData();
-  }, [exerciseDetail]);
+  const fetchRelatedExerciseData = async (exerciseDetailData: Exercise) => {
+    const targetMuscleExercisesData = await fetchData(
+      `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+      exerciseOptions
+    );
+    setTargetMuscleExercises(targetMuscleExercisesData);
 
-  useEffect(() => {
-    const fetchRelatedExerciseData = async () => {
-      if (exerciseDetail) {
-        const targetMuscleExercisesData = await fetchData(
-          `${exerciseDbUrl}/exercises/target/${exerciseDetail.target}`,
-          exerciseOptions
-        );
-        setTargetMuscleExercises(targetMuscleExercisesData);
-
-        const equipmentExercisesData = await fetchData(
-          `${exerciseDbUrl}/exercises/equipment/${exerciseDetail.equipment}`,
-          exerciseOptions
-        );
-        setEquipmentExercises(equipmentExercisesData);
-      }
-    };
-
-    fetchRelatedExerciseData();
-  }, [exerciseDetail]);
+    const equipmentExercisesData = await fetchData(
+      `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
+      exerciseOptions
+    );
+    setEquipmentExercises(equipmentExercisesData);
+  };
 
   if (!exerciseDetail) {
     return (
