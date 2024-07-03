@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import Detail from '../components/Detail';
 import ExerciseVideos from '../components/ExerciseVideos';
 import SimilarExercises from '../components/SimilarExercises';
 import { exerciseOptions, fetchData, youtubeOptions } from '../utils/fetchData';
+import Loader from '../components/Loader';
 
 import { Exercise, ExerciseVideoContent } from '../types';
 
@@ -56,8 +57,8 @@ const ExerciseDetail = () => {
 
   if (!exerciseDetail) {
     return (
-      <Stack height="100px" justifyContent="center" alignItems="center">
-        <Typography variant="h6">Loading...</Typography>
+      <Stack height="200px" justifyContent="center" alignItems="center">
+        <Loader />
       </Stack>
     );
   }

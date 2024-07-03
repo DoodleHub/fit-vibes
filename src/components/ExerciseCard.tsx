@@ -4,6 +4,7 @@ import { Button, Stack, Typography } from '@mui/material';
 import { Exercise } from '../types';
 
 type ExerciseCardProps = {
+  itemId: string;
   exercise: Exercise;
 };
 

@@ -62,6 +62,7 @@ body {
 }
 
 .exercise-card {
+  margin: 10px 40px;
   width: 400px;
   height: 445px;
   background: #fff;
@@ -100,7 +101,7 @@ body {
   flex-direction: column;
   gap: 24px;
   width: 387px;
-  height: 381px;
+  height: 350px;
   text-decoration: none;
 }
 

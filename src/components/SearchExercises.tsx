@@ -98,13 +98,13 @@ const SearchExercises = ({
       <Box sx={{ position: 'relative', width: '100%' }}>
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {bodyParts.map((item) => (
-            <Box key={item} itemId={item} title={item} m="0 40px">
-              <BodyPart
-                item={item}
-                bodyPart={bodyPart}
-                setBodyPart={setBodyPart}
-              />
-            </Box>
+            <BodyPart
+              key={item}
+              itemId={item}
+              item={item}
+              bodyPart={bodyPart}
+              setBodyPart={setBodyPart}
+            />
           ))}
         </ScrollMenu>
       </Box>

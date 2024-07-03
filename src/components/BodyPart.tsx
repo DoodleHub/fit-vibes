@@ -3,6 +3,7 @@ import { Stack, Typography } from '@mui/material';
 import Icon from '../assets/icons/gym.png';
 
 type BodyPartProps = {
+  itemId: string;
   item: string;
   setBodyPart: React.Dispatch<React.SetStateAction<string>>;
   bodyPart: string;
@@ -22,6 +23,7 @@ const BodyPart = ({ item, setBodyPart, bodyPart }: BodyPartProps) => {
         height: '280px',
         cursor: 'pointer',
         gap: '47px',
+        m: '0 40px',
       }}
       onClick={() => {
         setBodyPart(item);

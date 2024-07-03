@@ -9,7 +9,7 @@ type ExerciseVideosProps = {
 
 const ExerciseVideos = ({ exerciseVideos, name }: ExerciseVideosProps) => {
   return (
-    <Box sx={{ marginTop: { lg: '200px', xs: '20px' } }} p="20px">
+    <Box sx={{ marginTop: { lg: '50px', xs: '20px' } }} p="20px">
       <Typography variant="h3" mb="33px">
         Watch{' '}
         <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>
