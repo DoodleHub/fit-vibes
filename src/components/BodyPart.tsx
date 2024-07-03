@@ -2,7 +2,13 @@ import { Stack, Typography } from '@mui/material';
 
 import Icon from '../assets/icons/gym.png';
 
-const BodyPart = ({ item, setBodyPart, bodyPart }) => {
+type BodyPartProps = {
+  item: string;
+  setBodyPart: React.Dispatch<React.SetStateAction<string>>;
+  bodyPart: string;
+};
+
+const BodyPart = ({ item, setBodyPart, bodyPart }: BodyPartProps) => {
   return (
     <Stack
       alignItems="center"
