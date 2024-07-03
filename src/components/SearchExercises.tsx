@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 
-import HorizontalScrollbar from './HorizontalScrollbar';
+import { LeftArrow, RightArrow } from './HorizontalScrollbar';
 import { exerciseOptions, fetchData } from '../utils/fetchData';
+import BodyPart from './BodyPart';
 
 import { Exercise } from '../types';
 
@@ -93,13 +95,18 @@ const SearchExercises = ({
           Search
         </Button>
       </Box>
-      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
-        <HorizontalScrollbar
-          data={bodyParts}
-          bodyPart={bodyPart}
-          setBodyPart={setBodyPart}
-          isBodyParts
-        />
+      <Box sx={{ position: 'relative', width: '100%' }}>
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+          {bodyParts.map((item) => (
+            <Box key={item} itemId={item} title={item} m="0 40px">
+              <BodyPart
+                item={item}
+                bodyPart={bodyPart}
+                setBodyPart={setBodyPart}
+              />
+            </Box>
+          ))}
+        </ScrollMenu>
       </Box>
     </Stack>
   );

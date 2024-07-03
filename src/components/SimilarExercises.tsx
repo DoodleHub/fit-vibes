@@ -1,9 +1,11 @@
 import { Box, Stack, Typography } from '@mui/material';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 
-import HorizontalScrollbar from './HorizontalScrollbar';
+import { LeftArrow, RightArrow } from './HorizontalScrollbar';
 import Loader from './Loader';
 
 import { Exercise } from '../types';
+import ExerciseCard from './ExerciseCard';
 
 type SimilarExercisesProps = {
   targetMuscleExercises: Exercise[];
@@ -19,23 +21,47 @@ const SimilarExercises = ({
       <Typography variant="h3" mb={5}>
         Exercises that target the same muscle group
       </Typography>
-      <Stack direction="row" sx={{ p: '2', position: 'relative' }}>
+      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
         {targetMuscleExercises.length ? (
-          <HorizontalScrollbar data={targetMuscleExercises} />
+          <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+            {targetMuscleExercises.map((item) => (
+              <Box
+                key={item.id}
+                itemId={item.id}
+                title={item.id}
+                m="0 40px"
+                paddingY="20px"
+              >
+                <ExerciseCard exercise={item} />
+              </Box>
+            ))}
+          </ScrollMenu>
         ) : (
           <Loader />
         )}
-      </Stack>
+      </Box>
       <Typography variant="h3" mb={5}>
         Exercises that use the same equipment
       </Typography>
-      <Stack direction="row" sx={{ p: '2', position: 'relative' }}>
+      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
         {equipmentExercises.length ? (
-          <HorizontalScrollbar data={equipmentExercises} />
+          <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+            {equipmentExercises.map((item) => (
+              <Box
+                key={item.id}
+                itemId={item.id}
+                title={item.id}
+                m="0 40px"
+                paddingY="20px"
+              >
+                <ExerciseCard exercise={item} />
+              </Box>
+            ))}
+          </ScrollMenu>
         ) : (
           <Loader />
         )}
-      </Stack>
+      </Box>
     </Box>
   );
 };
