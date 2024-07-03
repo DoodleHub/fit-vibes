@@ -101,7 +101,6 @@ body {
   flex-direction: column;
   gap: 24px;
   width: 387px;
-  height: 350px;
   text-decoration: none;
 }
 
@@ -126,7 +125,6 @@ body {
 
   .exercise-video {
     width: 350px;
-    height: 300px;
   }
 }
 
