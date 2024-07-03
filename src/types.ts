@@ -8,3 +8,25 @@ export type Exercise = {
   secondaryMuscles: string[];
   instructions: string[];
 };
+
+type Thumbnail = {
+  height: number;
+  url: string;
+  width: number;
+};
+
+export type ExerciseVideo = {
+  channelId: string;
+  channelName: string;
+  description?: string;
+  lengthText: string;
+  publishedTimeText: string;
+  thumbnails: Thumbnail[];
+  title: string;
+  videoId: string;
+  viewCountText: string;
+};
+
+export type ExerciseVideoContent = {
+  video: ExerciseVideo;
+};
