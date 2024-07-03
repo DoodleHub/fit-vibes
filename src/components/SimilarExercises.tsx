@@ -17,11 +17,17 @@ const SimilarExercises = ({
   equipmentExercises,
 }: SimilarExercisesProps) => {
   return (
-    <Box sx={{ mt: { lg: '50px', xs: '0' }, mb: { lg: '50px', xs: 0 } }}>
+    <Box
+      sx={{
+        mt: { lg: '50px', xs: '0' },
+        mb: { lg: '50px', xs: 0 },
+        p: { lg: '20px', xs: '10px' },
+      }}
+    >
       <Typography variant="h3" mb={5}>
         Exercises that target the same muscle group
       </Typography>
-      <Box sx={{ position: 'relative', width: '100%', p: '20px', mb: '20px' }}>
+      <Box sx={{ position: 'relative', width: '100%', mb: '20px' }}>
         {targetMuscleExercises.length ? (
           <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
             {targetMuscleExercises.map((item) => (
@@ -35,7 +41,7 @@ const SimilarExercises = ({
       <Typography variant="h3" mb={5}>
         Exercises that use the same equipment
       </Typography>
-      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
+      <Box sx={{ position: 'relative', width: '100%' }}>
         {equipmentExercises.length ? (
           <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
             {equipmentExercises.map((item) => (

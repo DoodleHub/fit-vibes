@@ -16,44 +16,60 @@ const ExerciseDetail = () => {
   const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
   const [equipmentExercises, setEquipmentExercises] = useState([]);
   const { id } = useParams();
+  const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
+  const youtubeSearchUrl = 'https://youtube-search-and-download.p.rapidapi.com';
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
-      const youtubeSearchUrl =
-        'https://youtube-search-and-download.p.rapidapi.com';
-
       const exerciseDetailData = await fetchData(
         `${exerciseDbUrl}/exercises/exercise/${id}`,
         exerciseOptions
       );
+
       setExerciseDetail(exerciseDetailData);
-
-      const exerciseVideosData = await fetchData(
-        `${youtubeSearchUrl}/search?query=${exerciseDetailData.name}`,
-        youtubeOptions
-      );
-
-      const formattedExerciseVideosData = exerciseVideosData.contents.map(
-        (content: ExerciseVideoContent) => content.video
-      );
-      setExerciseVideos(formattedExerciseVideosData);
-
-      const targetMuscleExercisesData = await fetchData(
-        `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
-        exerciseOptions
-      );
-      setTargetMuscleExercises(targetMuscleExercisesData);
-
-      const equipmentExercisesData = await fetchData(
-        `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
-        exerciseOptions
-      );
-      setEquipmentExercises(equipmentExercisesData);
     };
 
     fetchExercisesData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchExerciseVideosData = async () => {
+      if (exerciseDetail) {
+        const exerciseVideosData = await fetchData(
+          `${youtubeSearchUrl}/search?query=${exerciseDetail.name}`,
+          youtubeOptions
+        );
+
+        const formattedExerciseVideosData = exerciseVideosData.contents.map(
+          (content: ExerciseVideoContent) => content.video
+        );
+
+        setExerciseVideos(formattedExerciseVideosData);
+      }
+    };
+
+    fetchExerciseVideosData();
+  }, [exerciseDetail]);
+
+  useEffect(() => {
+    const fetchRelatedExerciseData = async () => {
+      if (exerciseDetail) {
+        const targetMuscleExercisesData = await fetchData(
+          `${exerciseDbUrl}/exercises/target/${exerciseDetail.target}`,
+          exerciseOptions
+        );
+        setTargetMuscleExercises(targetMuscleExercisesData);
+
+        const equipmentExercisesData = await fetchData(
+          `${exerciseDbUrl}/exercises/equipment/${exerciseDetail.equipment}`,
+          exerciseOptions
+        );
+        setEquipmentExercises(equipmentExercisesData);
+      }
+    };
+
+    fetchRelatedExerciseData();
+  }, [exerciseDetail]);
 
   if (!exerciseDetail) {
     return (

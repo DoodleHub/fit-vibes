@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 
 import { ExerciseVideo } from '../types';
+import Loader from './Loader';
 
 type ExerciseVideosProps = {
   exerciseVideos: ExerciseVideo[];
@@ -9,7 +10,12 @@ type ExerciseVideosProps = {
 
 const ExerciseVideos = ({ exerciseVideos, name }: ExerciseVideosProps) => {
   return (
-    <Box sx={{ marginTop: { lg: '50px', xs: '20px' } }} p="20px">
+    <Box
+      sx={{
+        marginTop: { lg: '50px', xs: '20px' },
+        p: { lg: '20px', xs: '10px' },
+      }}
+    >
       <Typography variant="h3" mb="33px">
         Watch{' '}
         <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>
@@ -21,27 +27,31 @@ const ExerciseVideos = ({ exerciseVideos, name }: ExerciseVideosProps) => {
         justifyContent="flex-start"
         flexWrap="wrap"
         alignItems="center"
-        sx={{ flexDirection: { lg: 'row' }, gap: { lg: '110px', xs: '0' } }}
+        sx={{ flexDirection: { lg: 'row' }, gap: { lg: '110px', xs: '75px' } }}
       >
-        {exerciseVideos?.slice(0, 6).map((item) => (
-          <a
-            key={item.videoId}
-            className="exercise-video"
-            href={`https://www.youtube.com/watch?v=${item.videoId}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={item.thumbnails[0].url} alt={item.title} />
-            <Box>
-              <Typography variant="h5" color="#000">
-                {item.title}
-              </Typography>
-              <Typography variant="h6" color="#000">
-                {item.channelName}
-              </Typography>
-            </Box>
-          </a>
-        ))}
+        {exerciseVideos?.length ? (
+          exerciseVideos.slice(0, 6).map((item) => (
+            <a
+              key={item.videoId}
+              className="exercise-video"
+              href={`https://www.youtube.com/watch?v=${item.videoId}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={item.thumbnails[0].url} alt={item.title} />
+              <Box>
+                <Typography variant="h5" color="#000">
+                  {item.title}
+                </Typography>
+                <Typography variant="h6" color="#000">
+                  {item.channelName}
+                </Typography>
+              </Box>
+            </a>
+          ))
+        ) : (
+          <Loader />
+        )}
       </Stack>
     </Box>
   );
