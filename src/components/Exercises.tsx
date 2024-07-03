@@ -25,7 +25,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }: ExercisesProps) => {
   const paginate = (_: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
 
-    window.scrollTo({ top: 1800, behavior: 'smooth' });
+    location.href = '#exercises';
   };
 
   useEffect(() => {
