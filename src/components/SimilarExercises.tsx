@@ -9,13 +9,9 @@ import ExerciseCard from './ExerciseCard';
 
 type SimilarExercisesProps = {
   targetMuscleExercises: Exercise[];
-  equipmentExercises: Exercise[];
 };
 
-const SimilarExercises = ({
-  targetMuscleExercises,
-  equipmentExercises,
-}: SimilarExercisesProps) => {
+const SimilarExercises = ({ targetMuscleExercises }: SimilarExercisesProps) => {
   return (
     <Box
       sx={{
@@ -31,20 +27,6 @@ const SimilarExercises = ({
         {targetMuscleExercises.length ? (
           <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
             {targetMuscleExercises.map((item) => (
-              <ExerciseCard key={item.id} itemId={item.id} exercise={item} />
-            ))}
-          </ScrollMenu>
-        ) : (
-          <Loader />
-        )}
-      </Box>
-      <Typography variant="h3" mb={5}>
-        Exercises that use the same equipment
-      </Typography>
-      <Box sx={{ position: 'relative', width: '100%' }}>
-        {equipmentExercises.length ? (
-          <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-            {equipmentExercises.map((item) => (
               <ExerciseCard key={item.id} itemId={item.id} exercise={item} />
             ))}
           </ScrollMenu>
